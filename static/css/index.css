@@ -111,18 +111,26 @@ body {
 }
 
 .results-carousel {
-  overflow: hidden;
+  position: relative;
+  max-width: 80%;  /* 调整宽度，避免占满整个屏幕 */
+  margin: 0 auto;  /* 确保居中 */
+  overflow: hidden;  /* 防止溢出 */
+  white-space: nowrap;  /* 防止图片换行 */
 }
 
 .results-carousel .item {
-  margin: 5px;
-  overflow: hidden;
-  padding: 20px;
-  font-size: 0;
+  display: inline-block;  /* 让图片在同一行滚动 */
+  text-align: center;
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
 }
 
-.results-carousel video {
-  margin: 0;
+.results-carousel img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 .slider-pagination .slider-page {
