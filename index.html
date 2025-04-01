@@ -182,6 +182,38 @@ Garment Modeling</title>
 </section>
 <!-- End paper abstract -->
 
+<!-- Paper Method -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/garmage-pipeline.png" alt="MY ALT TEXT"/>
+          <p>
+            <b>Overview of the $\textbf{\textit{GarmageNet}}$ pipeline.</b> During training, a sample
+            garment (A) will be rasterized into a structured set of per-panel geometry
+            images - Garmages (B), and encoded into a geometry latent space (C).
+            During generation, we apply a two-stage diffusion process to re-produce
+            the garment (D) asset based on its text descriptions or raw sewing patterns.
+          </p>
+          <img src="static/images/paneljigsaw_pipline.png" alt="MY ALT TEXT"/>
+          <p>
+            <b>Overview of the $\textbf{\textit{PanelJigsaw}}$ pipline.</b>
+            Beginning with the generated Garmage (A),
+            we predict point-to-point stitching using both 2D and 3D boundary point features (C-E).
+            Simultaneously, we obtain vectorized pattern from Garmage (B).
+            We then combine it with point-to-point stitching to get sewing pattern (F),
+            which can be integrated into general garment modeling workflows and simulated for high-fidelity garments assets (G).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper method -->
+
+
 
 <!-- Image carousel -->
 <section class="hero is-small">
