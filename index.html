@@ -123,7 +123,7 @@ Garment Modeling</title>
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
-                    <span>Code</span>
+                    <span>Code (Coming Soon)</span>
                   </a>
                 </span>
 
@@ -132,9 +132,9 @@ Garment Modeling</title>
                   <a href=""  target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                    <i class="fas fa-democrat	"></i>
+                    <i class="fas fa-database	"></i>
                   </span>
-                  <span>Dataset</span>
+                  <span>Dataset (Coming Soon)</span>
                 </a>
               </span>
             </div>
@@ -213,22 +213,32 @@ Garment Modeling</title>
       <div class="column is-four-fifths">
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
-          <img src="static/images/garmage-pipeline.png" alt="MY ALT TEXT"/>
+          <figure class="image">
+            <img src="static/images/garmage-pipeline.png" alt="MY ALT TEXT"/>
+          </figure>
           <p>
-            <b>Overview of the $\textbf{\textit{GarmageNet}}$ pipeline.</b> During training, a sample
+            <b>Overview of the GarmageNet.</b> 
+            <small>During training, a sample
             garment (A) will be rasterized into a structured set of per-panel geometry
             images - Garmages (B), and encoded into a geometry latent space (C).
             During generation, we apply a two-stage diffusion process to re-produce
-            the garment (D) asset based on its text descriptions or raw sewing patterns.
+            the garment (D) asset based on its text descriptions or raw sewing patterns.</small>
           </p>
-          <img src="static/images/paneljigsaw_pipline.png" alt="MY ALT TEXT"/>
+
+          <br/>
+
+          <figure class="image">
+            <img src="static/images/paneljigsaw_pipline.png" alt="MY ALT TEXT"/>
+          </figure>
           <p>
-            <b>Overview of the $\textbf{\textit{PanelJigsaw}}$ pipline.</b>
-            Beginning with the generated Garmage (A),
-            we predict point-to-point stitching using both 2D and 3D boundary point features (C-E).
-            Simultaneously, we obtain vectorized pattern from Garmage (B).
-            We then combine it with point-to-point stitching to get sewing pattern (F),
-            which can be integrated into general garment modeling workflows and simulated for high-fidelity garments assets (G).
+            <b>Overview of PanelJigsaw.</b>
+            <small>
+              Beginning with the generated Garmage (A),
+              we predict point-to-point stitching using both 2D and 3D boundary point features (C-E).
+              Simultaneously, we obtain vectorized pattern from Garmage (B).
+              We then combine it with point-to-point stitching to get sewing pattern (F),
+              which can be integrated into general garment modeling workflows and simulated for high-fidelity garments assets (G).
+            </small>
           </p>
         </div>
       </div>
@@ -241,24 +251,27 @@ Garment Modeling</title>
 <section class="section hero">
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
-      <h2 class="title is-3">Results generated with Sewing Pattern and Text condition </h2>
+      <h2 class="title is-3">Results generated with Sewing Pattern and Text condition</h2>
       
-      <figure class="image">
-        <img src="static/images/garmage-result_SP-cond.png" alt="MY ALT TEXT" class="centered-image"/>
-      </figure>
-
+      
       <div class="container is-max-desktop"><p>
+        <figure class="image">
+          <img src="static/images/garmage-result_SP-cond.png" alt="MY ALT TEXT" class="centered-image"/>
+        </figure>
+        <br/>
         <b>Sewing Patterns guided garment generation results.</b> For clarity, we highlight specific panels in the sewing patterns to help readers identify
         correspondence between the generated Garmage and raw sewing pattern.
       </p></div>
 
       <br><br>
 
-      <figure class="image">
-        <img src="static/images/garmage-result_text-cond.png" alt="MY ALT TEXT" class="centered-image"/>
-      </figure>
-
       <div class="container is-max-desktop"><p>
+        <figure class="image">
+          <img src="static/images/garmage-result_text-cond.png" alt="MY ALT TEXT" class="centered-image"/>
+        </figure>
+        
+        <br/>
+
         <b>Text guided garment generation results.</b> From left to right of a example, we show the generated Garmages, predicted point-to-point stitches, line
         segments and final simulation results.
       </p></div>
@@ -272,14 +285,16 @@ Garment Modeling</title>
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
       <h2 class="title is-3">Comparison with Sewing Pattern Based method </h2>
-      <div class="content has-text-justified">      
-        <p>
-        Comparison of garment assets generated with GarmageNet with state-of-the-art sewing pattern based garment generation approaches
-        <a href="https://ihe-kaii.github.io/DressCode/" target="_blank">DressCode</a> and
-        <a href="https://style3d.github.io/design2garmentcode/" target="_blank">Design2GarmentCode</a>.
-        </p>
-      </div>
-      <div class="container">
+      <div class="container is-max-desktop">
+
+        <div class="content has-text-justified">      
+          <p>
+          Comparison of garment assets generated with GarmageNet with state-of-the-art sewing pattern based garment generation approaches
+          <a href="https://ihe-kaii.github.io/DressCode/" target="_blank">DressCode</a> and
+          <a href="https://style3d.github.io/design2garmentcode/" target="_blank">Design2GarmentCode</a>.
+          </p>
+        </div>
+
         <div id="results-carousel" class="carousel results-carousel">
           <div class="item">
           <!-- Your image here -->
@@ -306,10 +321,12 @@ Garment Modeling</title>
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
       <h2 class="title is-3">Comparison with Genreral 3D Generator</h2>
+      
+      <div class="container is-max-desktop">
       <figure class="image">
         <img src="static/images/stylexd_gen-comparison_3DGen_HD.png" alt="MY ALT TEXT">
       </figure>
-      <div class="container has-text-justified"><p>
+      <div class="content has-text-justified"><p>
         <b>Comparative with Tripo3D and Rodin Gen-1.5.</b>
           Each row corresponds to the generation results from a specific prompt, with our method’s output on the left, followed by Tripo3D and Rodin Gen-1.5. For each
           result, we present the 3D normal and X-ray rendering (left), close-up views of key features (middle), and the normal rendering map in UV space (right). Our
@@ -319,6 +336,7 @@ Garment Modeling</title>
           with manufacturing standards, making our approach highly suitable for practical applications in fashion design and production.
       </p></div>
     </div>
+
   </div>
 </section>
 
