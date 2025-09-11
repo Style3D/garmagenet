@@ -239,13 +239,15 @@ img {
 
 .x-handwriting {
     width: 100%;
-    font-family: 'Segoe Print';
-    font-size: 12px;
+    font-family: 'Segoe Print', cursive;
+    font-size: clamp(4px, 2vw, 12px);
     font-weight: 600;
     line-height: 1.5;
     color: black;
     text-align: justify;
+    overflow: hidden;
 }
+
 
 .x-image-prompt {
     height: calc(100% - 2px);

@@ -18,7 +18,7 @@ var garmageset_items = [
     },
     {
         render_image: "00003.png",
-        prompt: "dress; fitted silhouette, floor-length, formal style; sleeveless, high-low hemline, straight neckline, waist seam with belt detail, princess seams, central closure (likely hidden or minimalistic)",
+        prompt: "dress; fitted silhouette, floor-length, formal style; sleeveless, high-low hemline, straight neckline, waist seam with belt detail, princess seams, central closure (likely hidden or minimalistic).",
         model: "00003.glb", alt: ""
     },
     {
@@ -62,7 +62,7 @@ var txt2_items = [
     },
     {
         render_image: "garment_0224.png",
-        prompt: "Dress, X-shaped, Regular shoulders, Leg-of-mutton sleeves, No placket, Armhole princess seam, Gathered waist, Ruffle hem, Collarless, V-neckline",
+        prompt: "Dress, X-shaped, Regular shoulders, Leg-of-mutton sleeves, No placket, Armhole princess seam, Gathered waist, Ruffle hem, Collarless, V-neckline.",
         model: "garment_0224.glb", alt: ""
     },
     {
