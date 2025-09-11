@@ -1,373 +1,232 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="GarmageNet: A Dataset and Scalable Representation for Generic Garment Modeling">
-  <meta property="og:title" content="GarmageNet: A Dataset and Scalable Representation for Generic Garment Modeling"/>
-  <meta property="og:description" content="GarmageNet: A Dataset and Scalable Representation for Generic Garment Modeling"/>
-  <meta property="og:url" content="https://style3d.github.io/garmagenet/"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/image/garmage_teaser_with_caption.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GarmageNet: A Multimodal Generative Framework for Sewing Pattern Design and Generic Garment Modeling</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="stylesheet" href="fonts/avenir-next/stylesheet.css">
+        <link rel="stylesheet" href="fonts/segoe-print/stylesheet.css">
+        <link rel="stylesheet" href="icons/style.css">
+        <link rel="stylesheet" href="css/window.css">
+        <link rel="stylesheet" href="css/carousel.css">
+        <link rel="stylesheet" href="css/selection_panel.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/bulma.min.css">
 
+        <script src="js/window.js"></script>
+        <script src="js/carousel.js"></script>
+        <script src="js/selection_panel.js"></script>
+        <script src="js/generation.js"></script>
+		<script src="js/main.js"></script>
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    </head>
+    <body>
 
-  <meta name="twitter:title" content="GarmageNet: A Dataset and Scalable Representation for Generic Garment Modeling">
-  <meta name="twitter:description" content="GarmageNet: A Dataset and Scalable Representation for Generic Garment Modeling">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/garmage_teaser_with_caption.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="garment representation, garment and sewing pattern generation, garment dataset">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div id="main">
+        <!-- Title -->
+        <div id="title" class="x-gradient-font">
+            <small></small>
+            <img src="assets/images/logo.png" style="width:380px; height:auto;" alt="GarmageNet: "/> <br>
+            <small><small><small><small>
+            A Multimodal Generative Framework for Sewing Pattern Design and Generic Garment Modeling
+            </small></small></small></small>
+        </div>
+        <!-- Authors -->
+        <div id="authors">
+            <div><a href="">Siran Li</a><sup>1,2,*</sup>,</div>
+            <div><a href="">Chen Liu</a><sup>4,2,*</sup>,</div>
+            <div><a href="https://walnut-ree.github.io/">Ruiyang Liu</a><sup>2,*&dagger;</sup>,</div>
+            <div><a href="">Zhendong Wang</a><sup>2</sup>,</div>
+            <div><a href="">Gaofeng He</a><sup>2</sup>,</div>
+            <div><a href="https://dirtyharrylyl.github.io/">Yong-Lu Li</a><sup>3</sup>,</div>
+            <div><a href="http://www.cad.zju.edu.cn/home/jin/">Xiaogang Jin</a><sup>4</sup>,</div>
+            <div><a href="https://wanghmin.github.io/">Huamin Wang</a><sup>2</sup>,</div>
+        </div>
+        <div id="institution">
+            <div><sup>1 </sup>Zhejiang Sci-Tech University,</div>
+            <div><sup>2 </sup>Style3D Research,</div>
+            <div><sup>3 </sup>Shanghai Jiao Tong University,</div>
+            <div><sup>4 </sup>State Key Lab of CAD&CG, Zhejiang University</div>
+            <br/><br/>
+            <div><sup>* </sup>Equal contribution&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>&dagger; </sup>Corresponding author</div>
+        </div>
 
+        <div id="links">
+            <div><a id="paper" href="https://arxiv.org/pdf/2504.01483.pdf">Paper</a></div>
+            <div><a id="arxiv" href="https://arxiv.org/abs/2504.01483">Arxiv</a></div>
+            <div><a id="code" href="https://github.com/Style3D/garmagenet-impl">Code</a></div>
+            <div><a id="dataset" href="https://github.com/Style3D/garmagenet">Dataset</a></div>
+        </div>
 
-  <title>GarmageNet: A Multimodal Generative Framework for Sewing Pattern Design and Generic Garment Modeling</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
+        <div id="teaser">
+            <div style="width: 95%;">
+                <img src="assets/images/garmage_teaser.png" alt="teaser image"/>
+            </div> <br/>
 
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
-
-  <!-- Used to support editing of inline formulas (use $ to contain the latex formula) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
-      onload="renderMathInElement(document.body);"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      renderMathInElement(document.body, {
-        delimiters: [
-          {left: "$$", right: "$$", display: true},  // 块级公式
-          {left: "\\[", right: "\\]", display: true},  // 块级公式
-          {left: "$", right: "$", display: false},  // 行内公式
-          {left: "\\(", right: "\\)", display: false}  // 行内公式
-        ],
-        throwOnError: false
-      });
-    });
-  </script>
-</head>
-<body>
-
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-
-            <h1 class="title is-1 publication-title">
-              GarmageNet: <br> 
-              <small><small><small><small><small><small>
-              A Multimodal Generative Framework for Sewing Pattern Design and Generic Garment Modeling
-              </small></small></small></small></small></small>
-            </h1>
-            
-            <div class="is-size-6 publication-authors">
-              <!-- <br> -->
-              <!-- Paper authors -->
-              <span class="author-block"><a href="">Siran Li</a><sup>1,2,*</sup>,&nbsp;</span>
-              <span class="author-block"><a href="">Chen Liu</a><sup>4,2,*</sup>,&nbsp;</span>
-              <span class="author-block"><a href="https://walnut-ree.github.io/">Ruiyang Liu</a><sup>2,*&dagger;</sup>,&nbsp;</span>
-              <span class="author-block"><a href="">Zhendong Wang</a><sup>2</sup>,&nbsp;</span>
-              <span class="author-block"><a href="">Gaofeng He</a><sup>2</sup>,&nbsp;</span>
-              <span class="author-block"><a href="https://dirtyharrylyl.github.io/">Yong-Lu Li</a><sup>3</sup>,&nbsp;</span>
-              <span class="author-block"><a href="http://www.cad.zju.edu.cn/home/jin/">Xiaogang Jin</a><sup>4</sup>,&nbsp;</span>
-              <span class="author-block"><a href="https://wanghmin.github.io/">Huamin Wang</a><sup>2</sup>,</span>
-              </div>
-
-                <div class="is-size-7 publication-authors">
-                  <span class="author-block"><sup>1</sup>Zhejiang Sci-Tech University,&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <span class="author-block"><sup>2</sup>Style3D Research,&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <span class="author-block"><sup>3</sup>Shanghai Jiao Tong University,&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <span class="author-block"><sup>4</sup>State Key Lab of CAD&CG, Zhejiang University</span>
-                  <br>
-                  <span class="author-block"><sup>*</sup>Equal contribution&nbsp;&nbsp;&nbsp;&nbsp;<sup>&dagger;</sup>Corresponding author</span>
-                </div>
-
-                <div class="column has-text-centered">
-                  <div class="publication-links">
-                    <!-- Arxiv PDF link -->
-                    <span class="link-block">
-                      <a href="http://arxiv.org/abs/2504.01483" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="ai ai-arxiv"></i>
-                      </span>
-                      <span>Paper</span>
-                    </a>
-                  </span>
-
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a href="" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code (Coming Soon)</span>
-                  </a>
-                </span>
-
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href=""  target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fas fa-database	"></i>
-                  </span>
-                  <span>Dataset (Coming Soon)</span>
-                </a>
-              </span>
+            <div class="x-center-text" style="text-align:justify; font-size: 16px; font-weight: 500; color: #717388;">
+                <b>GarmageNet in Action: </b>
+                <small>
+                A diverse and sophisticated collection of garment assets automatically generated by our <b>GarmageNet</b> framework, 
+                along with their corresponding Garmages—our unified 2D–3D representation that encodes both sewing patterns and detailed geometry for seamless integration with existing garment modeling workflow. 
+                Altogether, GarmageNet generates garments across the spectrum of design complexity: from intricate multi-layered ensembles (3rd and 5th) and striking asymmetric styles (2nd and 4th) to form-fitting corsets requiring precise drape and structural fidelity (1st).
+                </small>
             </div>
-
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-
-<section class="hero teaser">
-<div class="container is-max-desktop">
-    <div class="hero-body">
-        <figure class="image">
-          <img src="static/images/garmage_teaser_with_caption.png" alt="MY ALT TEXT" class="centered-image"/>
-        </figure>
-        <br>
-        <b>GarmageNet in Action: </b>
+        <!-- Abstract -->
+        <div id="abstract" class="x-gradient-block">
         <small>
-          A diverse and sophisticated collection of garment assets automatically generated by our <b>GarmageNet</b> framework, 
-          along with their corresponding Garmages—our unified 2D–3D representation that encodes both sewing patterns and detailed geometry for seamless integration with existing garment modeling workflow. 
-          Altogether, GarmageNet generates garments across the spectrum of design complexity: from intricate multi-layered ensembles (3rd and 5th) and striking asymmetric styles (2nd and 4th) to form-fitting corsets requiring precise drape and structural fidelity (1st).
-        </small>
-    </div>
-  </div>
-</section>
-<!-- End Teaser Image -->
- 
-
-<!--&lt;!&ndash; Teaser video&ndash;&gt;-->
-<!--<section class="hero teaser">-->
-<!--  <div class="container is-max-desktop">-->
-<!--    <div class="hero-body">-->
-<!--      <video poster="" id="tree" autoplay controls muted loop height="100%">-->
-<!--        &lt;!&ndash; Your video here &ndash;&gt;-->
-<!--        <source src="static/videos/banner_video.mp4"-->
-<!--        type="video/mp4">-->
-<!--      </video>-->
-<!--      <h2 class="subtitle has-text-centered">-->
-<!--        Our Video.-->
-<!--      </h2>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-<!--&lt;!&ndash; End teaser video &ndash;&gt;-->
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-          Realistic digital garment modeling remains a labor-intensive task due to the intricate process of translating 2D sewing patterns into high-fidelity, simulation-ready 3D garments. 
-          <br/>
-          We introduce <b>GarmageNet</b>, a unified generative framework that automates the creation of 2D sewing patterns, the construction of sewing relationships, and the synthesis of 3D garment initializations compatible with physics-based simulation. 
-          Central to our approach is <b>Garmage</b>, a novel garment representation that encodes each panel as a structured geometry image, effectively bridging the semantic and geometric gap between 2D structural patterns and 3D garment shapes. 
-          <b>GarmageNet</b> employs a latent diffusion transformer to synthesize panel-wise geometry images and integrates <b>GarmageJigsaw</b>, a neural module for predicting point-to-point sewing connections along panel contours. 
-          To support training and evaluation, we build <b>GarmageSet</b>, a large-scale dataset comprising over 10,000 professionally designed garments with detailed structural and style annotations. 
-          <br/>
-          Our method demonstrates versatility and efficacy across multiple application scenarios, including <b>scalable garment generation</b> from multi-modal design concepts (text prompts, sketches, photographs), 
-          <b>automatic modeling</b> from raw flat sewing patterns, <b>pattern recovery</b> from unstructured point clouds, and <b>progressive garment editing</b> using conventional instructions-laying the foundation for fully automated, production-ready pipelines in digital fashion.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-<!-- Method -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <br>
-      <h2 class="title is-3">Method</h2>
-      <figure class="image">
-        <img src="static/images/overview.png" alt="Pipeline Overview">
-      </figure>
-      <h2 class="content">
-          <br>
-          <small>
-              Our framework seamlessly converts <b>multi-modal design inputs</b> (a), including text descriptions, sewing patterns, line-art sketches, and point clouds into <b>simulation-ready garment assets</b> (d). 
-              Central to our framework is the novel <b>Garmage representation</b> (b), a unified 2D–3D structure encoding each garment as a structured set of per-panel geometry images. 
-              Leveraging Garmage, our approach efficiently recovers <b>vertex-level sewing relationships</b> and <b>detailed 3D draping initializations</b> (c), enabling direct and high-quality garment simulation.
-          </small>
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <div class="columns is-vcentered">
-        <div class="column is-half">
-          <figure class="image">
-            <img src="static/images/garmage-pipeline.png" alt="Teaser Image">
-          </figure>
-        </div>
-        <div class="column is-half">
-          <h2 class="content has-text-left">
-              <b>Diffusive Garmage Generation.</b> 
-              <small>
-              During the <i>geometry encoding stage (top)</i>, each garment is encoded into a set of fixed-size (72-dimensional) latent vectors using a Variational Autoencoder (VAE). 
-              These compact latent representations serve as training targets for the subsequent <i>diffusion generation stage (bottom)</i>. 
-              <br/><br/>
-              In the diffusion generation stage, we employ a diffusion transformer (DiT) denoiser, 
-              integrating multi-modal conditions, including line-art sketches, raw sewing patterns, and point clouds via cross-attention mechanisms to effectively guide and control the garment generation process.
+        Realistic digital garment modeling remains a labor-intensive task due to the intricate process of translating 2D sewing patterns into high-fidelity, simulation-ready 3D garments.
+        We introduce <i>GarmageNet</i>, a unified generative framework that automates the creation of 2D sewing patterns, the construction of sewing relationships, and the synthesis of 3D garment initializations compatible with physics-based simulation. 
+        Central to our approach is <i>Garmage</i>, a novel garment representation that encodes each panel as a structured geometry image, effectively bridging the semantic and geometric gap between 2D structural patterns and 3D garment shapes. 
+        <i>GarmageNet</i> employs a latent diffusion transformer to synthesize panel-wise geometry images and integrates <i>GarmageJigsaw</i>, a neural module for predicting point-to-point sewing connections along panel contours. 
+        To support training and evaluation, we build <i>GarmageSet</i>, a large-scale dataset comprising over 10,000 professionally designed garments with detailed structural and style annotations.
+        Our method demonstrates versatility and efficacy across multiple application scenarios, including <i>scalable garment generation</i> from multi-modal design concepts (text prompts, sketches, photographs), 
+        <i>automatic modeling</i> from raw flat sewing patterns, <i>pattern recovery</i> from unstructured point clouds, and <i>progressive garment editing</i> using conventional instructions-laying the foundation for fully automated, production-ready pipelines in digital fashion.
             </small>
-          </h2>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <div class="columns is-vcentered">
-        <div class="column is-half">
-          <h2 class="content">
-            <b>Simulation-ready Sewing-Pattern Recovery.</b>  
-            <small>  
-              We sample boundary points (c) from the generated Garmage, classify them as sewing or non-sewing (d), and predict point-to-point stitches (e) as an adjacency matrix. 
-              Vectorized sewing patterns (b) are extracted from the Garmage silhouette, stitched accordingly (f), and reconstructed into triangle meshes via Delaunay triangulation. 
-              Vertex-wise draping from Garmage is then applied, yielding a simulation-ready mesh for integration into any cloth simulation engine to produce the final garment (g).
+        <!-- Overview -->
+        <div class="x-section-title"><div class="x-gradient-font">Methodology</div></div>
+        <p>
+            <img src="assets/images/overview.png" alt="Pipeline of the method" style="width: 100%;">
+        </p>
+        <div class="x-center-text" style="text-align:justify; font-size: 16px; font-weight: 500; color: #717388;">
+            <b>Framework Overview: </b>
+            <small>
+                Our framework seamlessly converts <b>multi-modal design inputs</b> (a), including text descriptions, sewing patterns, line-art sketches, and point clouds into <b>simulation-ready garment assets</b> (d). 
+                Central to our framework is the novel <b>Garmage representation</b> (b), a unified 2D–3D structure encoding each garment as a structured set of per-panel geometry images. 
+                Leveraging Garmage, our approach efficiently recovers <b>vertex-level sewing relationships</b> and <b>detailed 3D draping initializations</b> (c), enabling direct and high-quality garment simulation.
             </small>
+        </div>
+
+        <!-- Generation Pipeline-->
+        <div class="columns is-vcentered" style="margin: 15px;">
+            <div class="column is-half">
+            <figure class="image">
+                <img src="assets/images/garmage-pipeline.png" alt="Teaser Image">
+            </figure>
+            </div>
+            <div class="column is-half">
+            <h2 class="content has-text-left" style="font-weight: 500; color: #717388;">
+                <b>Diffusive Garmage Generation.</b> 
+                <small>
+                During the <i>geometry encoding stage (top)</i>, each garment is encoded into a set of fixed-size (72-dimensional) latent vectors using a Variational Autoencoder (VAE). 
+                These compact latent representations serve as training targets for the subsequent <i>diffusion generation stage (bottom)</i>. 
+                <br/><br/>
+                In the diffusion generation stage, we employ a diffusion transformer (DiT) denoiser, 
+                integrating multi-modal conditions, including line-art sketches, raw sewing patterns, and point clouds via cross-attention mechanisms to effectively guide and control the garment generation process.
+                </small>
             </h2>
+            </div>
         </div>
-        <div class="column is-half">
-          <figure class="image">
-            <img src="static/images/garmagejigsaw.png" alt="Teaser Image">
-          </figure>
+
+        <!-- Stitching Pipeline-->
+        <div class="columns is-vcentered" style="margin: 15px;">
+            <div class="column is-half">
+            <h2 class="content" style="font-weight: 500; color: #717388;">
+                <b>Simulation-ready Sewing-Pattern Recovery.</b>  
+                <small>  
+                We sample boundary points (c) from the generated Garmage, classify them as sewing or non-sewing (d), and predict point-to-point stitches (e) as an adjacency matrix. 
+                Vectorized sewing patterns (b) are extracted from the Garmage silhouette, stitched accordingly (f), and reconstructed into triangle meshes via Delaunay triangulation. 
+                Vertex-wise draping from Garmage is then applied, yielding a simulation-ready mesh for integration into any cloth simulation engine to produce the final garment (g).
+                </small>
+                </h2>
+            </div>
+            <div class="column is-half">
+            <figure class="image">
+                <img src="assets/images/garmagejigsaw.png" alt="Teaser Image">
+            </figure>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-
-<!-- Method -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <br>
-      <h2 class="title is-3">Unconditional Generation Comparison</h2>
-      <figure class="image">
-        <img src="static/images/uncond_comp.jpg" alt="Unconditional Generation Comparison Results">
-      </figure>
-      <h2 class="content">
-          <br>
-          <b>Unconditional garment generation comparison between GarmageNet, <a href="https://omages.github.io/">Omage</a>, and <a href="https://yzmblog.github.io/projects/SurfD/">Surf-D</a>.</b>
-          <small>
-            GarmageNet (left block) produces simulation-ready assets complete with vectorized sewing patterns, vertex-wise stitch relationships, and fine-grained 3D draping initializations (a,b,c,d). 
-            In contrast, Omage’s outputs (top right) exhibit incomplete panels (g), grid-like tessellation artifacts (f), 
-            erroneous stitching between non-adjacent panels (h), and spurious triangles that connect a panel’s boundary vertices back to the global origin (e). 
-            Surf-D’s meshes (bottom right) suffer from unwanted holes (i, l) and frayed, irregular boundaries (j, k). 
-            These close-up comparisons highlight GarmageNet’s superior geometric fidelity, coherent panel topology, and artifact-free mesh integrity
-          </small>
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- TODO: Add Multi-modal generation results as video or glb. e.g. https://microsoft.github.io/TRELLIS/ -->
-
-<!-- Method -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <br>
-      <h2 class="title is-3">Applications</h2>
-      <video poster="" id="tree" autoplay controls muted loop height=" 20%">
-        <!-- Your video here -->
-        <source src="static/videos/demo_video.mp4"
-        type="video/mp4">
-      </video>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- End image carousel -->
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre>
-        <code>
-        @article{li2025garmagenet,
-          title={GarmageNet: A Multimodal Generative Framework for Sewing Pattern Design and Generic Garment Modeling},
-          author={Li, Siran and Liu, Chen and Liu, Ruiyang and Wang, Zhendong and He, Gaofeng and Li, Yong-Lu and Jin, Xiaogang and Wang, Huamin},
-          journal={arXiv preprint arXiv:2504.01483},
-          year={2025}
-        }
-      </code>
-    </pre>
-    </div>
-</section>
-<!--End BibTex citation -->
-
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
+        <!-- GarmageSet Examples-->
+        <div class="x-section-title"><div class="x-gradient-font">GarmageSet</div></div>
+        <div class="x-center-text" style="text-align:justify; font-size: 16px; font-weight: 500; color: #717388;">
+            <b>GarmageSet </b>
+            <small>
+            is a professionally curated, industrial-grade dataset comprises <b style="color: #8B645A;">14,801</b> unique garments spanning <b style="color: #8B645A;">five</b> 
+            major clothing categories like tops, pants, skirts, dresses, outerwears 
+            and several minor categories like bras, vests, pajamas. 
+            </small>
         </div>
-      </div>
+        <div id="results-garmageset"></div>
+
+        <!-- Multi-modal Generation Examples-->
+        <div class="x-section-title"><div class="x-gradient-font">Multi-modal Generation</div></div>
+        <div class="x-center-text" style="text-align:justify; font-size: 16px; font-weight: 500; color: #717388;">
+            <b>GarmageNet </b>
+            <small>
+            can generate 3D assets from various input modalities, including <b style="color: #717388;">text</b>, <b style="color: #717388;">line-art sketches</b> and <b style="color: #717388;">in-the-wild images</b>.
+            </small>
+        </div>
+
+
+        <!-- Caption Generation Examples-->
+        <div class="x-section-title"><div class="x-gradient-font" style="font-size: 24px">---> caption generation</div></div>
+        <div id="results-txt2"></div>
+
+        <!-- Image & Sketch Generation Examples-->
+        <div class="x-section-title"><div class="x-gradient-font" style="font-size: 24px">---> image & sketch generation</div></div>
+        <div id="results-sketch"></div>
+
+        <!-- Automatic Garment Modeling Examples-->
+        <div class="x-section-title"><div class="x-gradient-font">Automatic Garment Modeling</div></div>
+        <div class="x-center-text" style="text-align:justify; font-size: 16px; font-weight: 500; color: #717388;">
+            <small>
+            In industry practice, garments typically exist as raw 2D sewing patterns (.DXF) without corresponding draped 3D assets.
+            Converting these patterns into draped meshes is a complex, simulation-guided process that often requires multiple iterations and can take hours or even days for professionals.
+            Leveraging a masked training scheme during latent encoding, <b>GarmageNet </b> generates complete garment assets from raw sewing patterns,
+            by providing fine-grained 3D initialization through the Garmage representation and establishing vertex-level stitching relationships using <b>GarmageJigsaw</b>.
+            </small>
+        </div>
+        <div id="results-autoGM"></div>
+
+        <!-- Sewing Pattern Recovery Examples-->
+        <div class="x-section-title"><div class="x-gradient-font">Sewing Pattern Recovery</div></div>
+        <div class="x-center-text" style="text-align:justify; font-size: 16px; font-weight: 500; color: #717388;">
+            <small>
+            With the rise of 3D scanning and multi-view reconstruction, capturing realistic garment shapes as unstructured point clouds has become easier than ever. 
+            But these raw 3D forms lack the <b>structured sewing patterns</b> needed for actual production. 
+            <b>GarmageNet</b> bridges this gap by transforming point-cloud data of draped garments into Garmages with structured sewing patterns, enabling direct integration into manufacturing workflows.
+            </small>
+        </div>
+        <div id="results-SPrecovery"></div>
+
+        <!-- Progressive Generation And Editing Video -->
+        <div class="x-section-title"><div class="x-gradient-font">Progressive Generation And Editing</div></div>
+        <div class="x-center-text" style="text-align:justify; font-size: 16px; font-weight: 500; color: #717388;">
+            <b>GarmageNet </b>
+            <small>
+            supports advanced garment editing functionalities, such as adding, deleting, or replacing components of an existing garment.
+            </small>
+        </div>
+        <video autoplay controls muted loop height=" 20%" style="margin: 16px;">
+            <source src="assets/demo_video_editing.mp4"
+            type="video/mp4">
+        </video>
+
+            
+        <div class="x-section-title"><div class="x-gradient-font">Citation</div></div>
+        <p class="bibtex x-gradient-block">
+@article{li2025garmagenet,
+    title={GarmageNet: A Multimodal Generative Framework for Sewing Pattern Design and Generic Garment Modeling},
+    author={Li, Siran and Liu, Chen and Liu, Ruiyang and Wang, Zhendong and 
+            He, Gaofeng and Li, Yong-Lu and Jin, Xiaogang and Wang, Huamin},
+    journal={arXiv preprint arXiv:2504.01483},
+    year={2025}
+}
+        </p>
+        
     </div>
-  </div>
-</footer>
+        
+    <div id="bottombar">
+        <div class="row">
+            <div>
+                The page template is borrowed from <a href="https://microsoft.github.io/TRELLIS/"><span>T<span style="font-size: 10px;">RELLIS</span></span></a>.
+            </div>
+        </div>
+    </div>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+    </body>
+</html>
